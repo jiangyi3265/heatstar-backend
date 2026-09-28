@@ -1,0 +1,21 @@
+[Unit]
+Description=HeatStar shared API
+After=network.target
+
+[Service]
+Type=simple
+User=www
+Group=www
+WorkingDirectory=/www/wwwroot/heatstar-api
+Environment=PYTHONUNBUFFERED=1
+Environment=HEATSTAR_DATA_DIR=/www/wwwroot/heatstar-api/data
+ExecStart=/usr/bin/python3 /www/wwwroot/heatstar-api/app.py --host 127.0.0.1 --port 8765
+Restart=always
+RestartSec=3
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=full
+ReadWritePaths=/www/wwwroot/heatstar-api/data
+
+[Install]
+WantedBy=multi-user.target
